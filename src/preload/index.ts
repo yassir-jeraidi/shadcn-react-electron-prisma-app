@@ -1,12 +1,25 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { channels } from '@shared/constants'
+import { User } from '@prisma/client'
 
-// Custom APIs for renderer
-const api = {}
+type UserService = {
+  getAll: () => Promise<User[]>
+  getOne: (id: string) => Promise<User | undefined>
+}
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
+export type API = {
+  users: UserService
+}
+
+const api: API = {
+  users: {
+    getAll: () => ipcRenderer.invoke(channels.users.getAll),
+    getOne: (id: string) => ipcRenderer.invoke(channels.users.getOne, id)
+  }
+}
+
+// Expose the APIs to the renderer process
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
@@ -15,8 +28,10 @@ if (process.contextIsolated) {
     console.error(error)
   }
 } else {
-  // @ts-ignore (define in dts)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   window.electron = electronAPI
-  // @ts-ignore (define in dts)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   window.api = api
 }
