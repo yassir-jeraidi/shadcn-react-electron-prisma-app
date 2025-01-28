@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { channels } from '@shared/constants'
 import { User } from '@prisma/client'
+import { channels } from '@shared/constants'
 
 type UserService = {
   getAll: () => Promise<User[]>
