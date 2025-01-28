@@ -10,19 +10,17 @@
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
+    "noUnusedLocals": false,
     "baseUrl": ".",
     "paths": {
-      "@/": [
-        "./src/renderer/src/"
-      ],
-      "@preload/*": [
-        "./src/preload/*"
-      ],
       "@renderer/*": [
-        "./src/renderer/src/*"
+        "src/renderer/src/*"
       ],
       "@shared/*": [
-        "./src/shared/*"
+        "src/shared/*"
+      ],
+      "@/*": [
+        "src/renderer/src/*"
       ]
     }
   }
