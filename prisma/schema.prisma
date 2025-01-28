@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id       Int       @id @default(autoincrement()) // Integer ID for SQLite
+  slug     String    @unique
+  title    String
+  body     String
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId Int // Foreign key, should match the integer type of the User's id
+  comments Comment[] // One-to-many relationship with comments
+}
+
+model User {
+  id    Int     @id @default(autoincrement()) // Integer ID for SQLite
+  email String  @unique
+  name  String?
+  posts Post[] // One-to-many relationship with posts
+}
+
+model Comment {
+  id      Int    @id @default(autoincrement()) // Integer ID for SQLite
+  comment String
+  post    Post   @relation(fields: [postId], references: [id])
+  postId  Int // Foreign key, should match the integer type of the Post's id
+}
