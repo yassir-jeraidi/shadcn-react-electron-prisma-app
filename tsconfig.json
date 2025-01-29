@@ -8,18 +8,4 @@
       "path": "./tsconfig.web.json"
     }
   ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/renderer/src/*"
-      ],
-      "@shared/*": [
-        "./src/shared/*"
-      ],
-      "@preload/*": [
-        "./src/preload/*"
-      ]
-    }
-  }
 }
