@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
-import { prisma } from '../utils/prisma'
+import { prisma } from '@preload/utils/prisma'
 
-export const usersApi = {
+export const userService = {
   getAll: (): Promise<User[]> => prisma.user.findMany(),
   getOne: async (id: number): Promise<User | null> =>
     await prisma.user.findUnique({ where: { id } })

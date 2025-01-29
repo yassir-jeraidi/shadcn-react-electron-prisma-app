@@ -5,7 +5,7 @@ import { channels } from '@shared/constants'
 
 type UserService = {
   getAll: () => Promise<User[]>
-  getOne: (id: string) => Promise<User | undefined>
+  getOne: (id: number) => Promise<User | undefined>
 }
 
 export type API = {
@@ -15,11 +15,10 @@ export type API = {
 const api: API = {
   users: {
     getAll: () => ipcRenderer.invoke(channels.users.getAll),
-    getOne: (id: string) => ipcRenderer.invoke(channels.users.getOne, id)
+    getOne: (id: number) => ipcRenderer.invoke(channels.users.getOne, id)
   }
 }
 
-// Expose the APIs to the renderer process
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
@@ -28,10 +27,6 @@ if (process.contextIsolated) {
     console.error(error)
   }
 } else {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   window.electron = electronAPI
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   window.api = api
 }

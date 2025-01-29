@@ -12,14 +12,22 @@ import {
 import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import { User } from '@prisma/client'
+import { userService } from '@/services/userService'
+import { channels } from '@shared/constants'
+
+console.log(channels)
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([])
 
   const getUsers = async (): Promise<void> => {
-    const users: User[] = await window.api.users.getAll()
-    console.log(users)
+    const users: User[] = await userService.getAll()
     setUsers(users)
+  }
+
+  const getUser = async (id: number): Promise<void> => {
+    const user: User | undefined = await userService.getOne(id)
+    setUsers([user as User])
   }
 
   useEffect(() => {
@@ -39,6 +47,7 @@ function App(): JSX.Element {
               {users.map((user) => (
                 <div key={user.id}>{user.name}</div>
               ))}
+              <Button onClick={() => getUser(2)}>Get One</Button>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
