@@ -140,7 +140,7 @@ module.exports = {
   },
   "rsc": false,
   "aliases": {
-    "utils": "@/lib/utils",
+    "utils": "@/lib/lib",
     "components": "@/components",
     "lib": "@/lib",
     "hooks": "@/lib/hooks",

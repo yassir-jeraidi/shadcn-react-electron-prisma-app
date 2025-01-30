@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { ipcHandler } from '@preload/ipc-handler'
+import { ipcHandler } from '@preload/ipc'
 
 function createWindow(): void {
   // Create the browser window.
@@ -50,6 +50,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  // Set up IPC handlers
   ipcHandler()
 
   createWindow()

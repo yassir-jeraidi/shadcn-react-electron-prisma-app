@@ -19,6 +19,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': resolve('src/preload'),
+        '@preload': resolve('src/preload'),
         '@shared': resolve('src/shared')
       }
     }
@@ -27,6 +28,7 @@ export default defineConfig({
     assetsInclude: 'src/renderer/assets',
     resolve: {
       alias: {
+        '@': resolve('src/renderer/src'),
         '@renderer': resolve('src/renderer/src'),
         '@/components': resolve('src/renderer/src/components'),
         '@/services': resolve('src/renderer/src/services'),

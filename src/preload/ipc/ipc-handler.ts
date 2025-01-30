@@ -1,13 +1,8 @@
-import { ipcMain } from 'electron'
-import { channels } from '@shared/constants'
-import { userService } from '@preload/services/userService'
+import { userService, postService } from '@preload/services'
+import { Post, User } from '@prisma/client'
+import { generateIpcHandlerService } from '@preload/lib/utils'
 
 export const ipcHandler = (): void => {
-  ipcMain.handle(channels.users.getAll, async () => {
-    return await userService.getAll()
-  })
-
-  ipcMain.handle(channels.users.getOne, async (_event, id: number) => {
-    return userService.getOne(id)
-  })
+  generateIpcHandlerService<User>('users', userService)
+  generateIpcHandlerService<Post>('posts', postService)
 }

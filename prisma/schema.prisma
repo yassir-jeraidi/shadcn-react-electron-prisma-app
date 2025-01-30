@@ -9,25 +9,25 @@ datasource db {
 }
 
 model Post {
-  id       Int       @id @default(autoincrement()) // Integer ID for SQLite
+  id       Int       @id @default(autoincrement())
   slug     String    @unique
   title    String
   body     String
   author   User      @relation(fields: [authorId], references: [id])
-  authorId Int // Foreign key, should match the integer type of the User's id
-  comments Comment[] // One-to-many relationship with comments
+  authorId Int
+  comments Comment[]
 }
 
 model User {
-  id    Int     @id @default(autoincrement()) // Integer ID for SQLite
+  id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
-  posts Post[] // One-to-many relationship with posts
+  posts Post[]
 }
 
 model Comment {
-  id      Int    @id @default(autoincrement()) // Integer ID for SQLite
+  id      Int    @id @default(autoincrement())
   comment String
   post    Post   @relation(fields: [postId], references: [id])
-  postId  Int // Foreign key, should match the integer type of the Post's id
+  postId  Int
 }

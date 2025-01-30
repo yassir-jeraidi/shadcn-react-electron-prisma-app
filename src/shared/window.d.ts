@@ -1,4 +1,4 @@
-import { API } from '@preload/index'
+import { API } from 'src/shared/types'
 import { electronAPI } from '@electron-toolkit/preload'
 
 export declare global {

@@ -1,23 +1,6 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { User } from '@prisma/client'
-import { channels } from '@shared/constants'
-
-type UserService = {
-  getAll: () => Promise<User[]>
-  getOne: (id: number) => Promise<User | undefined>
-}
-
-export type API = {
-  users: UserService
-}
-
-const api: API = {
-  users: {
-    getAll: () => ipcRenderer.invoke(channels.users.getAll),
-    getOne: (id: number) => ipcRenderer.invoke(channels.users.getOne, id)
-  }
-}
+import { api } from '@preload/lib/api'
 
 if (process.contextIsolated) {
   try {
