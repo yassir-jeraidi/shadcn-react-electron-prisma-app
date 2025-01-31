@@ -39,7 +39,17 @@ const landings: Landing[] = [
   },
   {
     id: nanoid(),
+    title: 'Create User',
+    route: '/users'
+  },
+  {
+    id: nanoid(),
     title: 'Posts',
+    route: '/posts'
+  },
+  {
+    id: nanoid(),
+    title: 'Create Post',
     route: '/posts'
   }
 ]
