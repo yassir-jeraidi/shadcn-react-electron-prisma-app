@@ -1,14 +1,14 @@
-import { Post, User } from '@prisma/client'
+import { Post, User, Prisma } from '@prisma/client'
 
-export type CrudService<T> = {
+export type CrudService<T, CreateInput, UpdateInput> = {
   getAll: () => Promise<T[]>
   getOne: (id: number) => Promise<T | null>
-  save: (data: T) => Promise<T>
-  update: (id: number, data: T) => Promise<T | null>
+  save: (data: CreateInput) => Promise<T>
+  update: (id: number, data: UpdateInput) => Promise<T | null>
   delete: (id: number) => Promise<T | null>
 }
 
 export type API = {
-  users: CrudService<User>
-  posts: CrudService<Post>
+  users: CrudService<User, Prisma.UserCreateInput, Prisma.UserUpdateInput>
+  posts: CrudService<Post, Prisma.PostCreateInput, Prisma.PostUpdateInput>
 }
