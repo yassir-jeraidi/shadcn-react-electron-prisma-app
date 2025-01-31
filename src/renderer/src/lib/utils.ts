@@ -6,3 +6,7 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 export const api = window.api
+
+export const redirectTo = (path: string): void => {
+  window.location.hash = path
+}
