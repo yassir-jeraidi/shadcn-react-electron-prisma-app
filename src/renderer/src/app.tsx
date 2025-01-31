@@ -1,8 +1,13 @@
 import { RouterProvider } from 'react-router-dom'
 import { router } from '@/router'
+import React from 'react'
+import { Toaster } from '@/components/ui/sonner'
 
-function App(): React.JSX.Element {
-  return <RouterProvider router={router} />
+export default function App(): React.JSX.Element {
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  )
 }
-
-export default App
