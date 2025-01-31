@@ -6,7 +6,7 @@ export default function GuestLayout(): React.JSX.Element {
   return (
     <div className="container">
       <Navbar />
-      <div className="w-full max-w-sm p-4 bg-white rounded-lg shadow-lg">
+      <div className="w-full p-4 bg-white rounded-lg shadow-lg">
         <Outlet />
       </div>
     </div>
